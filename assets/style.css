@@ -1,6 +1,6 @@
 /* assets/style.css */
 
-/* Custom scrollbar to match the high-end retail aesthetic */
+/* Custom scrollbar to match the high-end retail aesthetic (For vertical scrolling) */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -14,16 +14,25 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #FFF2C5; 
+    background: #FF99C8; /* Switched to pink for the hover! */
 }
 
 /* Base selection color */
 ::selection {
-    background-color: #FFF2C5;
+    background-color: #FF99C8;
     color: #1A1A1A;
 }
 
 /* Ensure images don't act as draggable elements during casual browsing */
 img {
     pointer-events: none;
+}
+
+/* Hide scrollbar for horizontal carousels (Nike style) */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
