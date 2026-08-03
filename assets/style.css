@@ -1,0 +1,29 @@
+/* assets/style.css */
+
+/* Custom scrollbar to match the high-end retail aesthetic */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFFFFF; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1A1A1A; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFF2C5; 
+}
+
+/* Base selection color */
+::selection {
+    background-color: #FFF2C5;
+    color: #1A1A1A;
+}
+
+/* Ensure images don't act as draggable elements during casual browsing */
+img {
+    pointer-events: none;
+}
