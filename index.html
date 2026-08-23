@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>papayareworks | Official Store</title>
+    <title>papayareworks | Lookbook</title>
     
-    <!-- Google Fonts for a playful, retro look -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
@@ -46,13 +46,13 @@
 
     <!-- Top Utility Banner -->
     <div class="bg-strawberryRed text-white text-center p-3 text-sm tracking-wider uppercase font-bold border-b-4 border-brandBlack z-50 relative">
-        Free shipping on all orders over $150 🍓
+        Worldwide Shipping Available 🍓
     </div>
 
     <!-- Main Navigation -->
     <header class="flex justify-between items-center py-4 px-8 border-b-4 border-brandBlack sticky top-0 bg-cardWhite z-40 shadow-sm">
         <ul class="hidden md:flex gap-8 text-base uppercase font-semibold">
-            <li><a href="#" class="hover:text-bubblegumPink transition-colors">Shop All</a></li>
+            <li><a href="#" class="hover:text-bubblegumPink transition-colors">Catalog</a></li>
             <li><a href="#" class="hover:text-papayaOrange transition-colors">Patchwork</a></li>
             <li><a href="#" class="hover:text-leafGreen transition-colors">Appliqué</a></li>
         </ul>
@@ -65,11 +65,7 @@
 
         <ul class="flex gap-8 text-base uppercase font-semibold">
             <li class="cursor-pointer hover:text-papayaOrange transition-colors">Search</li>
-            <li class="hidden md:block cursor-pointer hover:text-bubblegumPink transition-colors">Account</li>
-            <!-- Cart Toggle -->
-            <li id="cart-toggle" class="cursor-pointer hover:text-strawberryRed transition-colors flex items-center gap-1">
-                Cart (<span id="cart-count">0</span>)
-            </li>
+            <li class="cursor-pointer hover:text-strawberryRed transition-colors">Contact</li>
         </ul>
     </header>
 
@@ -78,15 +74,15 @@
         <h1 class="text-5xl md:text-7xl uppercase font-bold mb-8 z-10 tracking-wide text-brandBlack drop-shadow-[4px_4px_0_var(--tw-shadow-color)] shadow-cardWhite">
             The Spring Collection
         </h1>
-        <a href="#shop" class="bg-papayaOrange text-brandBlack border-4 border-brandBlack rounded-full uppercase font-bold text-xl py-4 px-10 shadow-chunky hover:shadow-chunky-hover hover:bg-cardWhite hover:-translate-y-1 transition-all duration-200 z-10">
-            Shop Now
+        <a href="#catalog" class="bg-papayaOrange text-brandBlack border-4 border-brandBlack rounded-full uppercase font-bold text-xl py-4 px-10 shadow-chunky hover:shadow-chunky-hover hover:bg-cardWhite hover:-translate-y-1 transition-all duration-200 z-10">
+            View Lookbook
         </a>
     </section>
 
-    <!-- 2. NIKE STYLE: Trending Now (Horizontal Scroll) -->
+    <!-- 2. Trending Now (Horizontal Scroll) -->
     <section class="py-16 px-6 md:px-10 max-w-[1600px] mx-auto border-b-4 border-brandBlack">
         <div class="flex justify-between items-end mb-8">
-            <h2 class="text-3xl md:text-5xl uppercase font-bold tracking-wide text-brandBlack">Trending Now 🔥</h2>
+            <h2 class="text-3xl md:text-5xl uppercase font-bold tracking-wide text-brandBlack">Featured Pieces 🔥</h2>
             <div class="hidden md:flex gap-4">
                 <button class="w-12 h-12 rounded-full border-4 border-brandBlack bg-cardWhite shadow-chunky hover:bg-bubblegumPink flex items-center justify-center text-xl font-bold">&larr;</button>
                 <button class="w-12 h-12 rounded-full border-4 border-brandBlack bg-cardWhite shadow-chunky hover:bg-bubblegumPink flex items-center justify-center text-xl font-bold">&rarr;</button>
@@ -97,136 +93,87 @@
         <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar">
             
             <!-- Trending Item 1 -->
-            <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky flex flex-col relative">
-                <div class="absolute top-2 right-2 bg-papayaOrange text-brandBlack text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack z-10">Selling Fast</div>
-                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink cursor-pointer">
-                    <img src="assets/image_80c806.jpg" alt="Pink Gingham Strawberry Vest" class="w-full h-full object-cover hover:scale-105 transition-transform">
+            <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky hover:shadow-chunky-hover hover:-translate-y-2 transition-all duration-300 flex flex-col relative cursor-pointer">
+                <div class="absolute top-2 right-2 bg-papayaOrange text-brandBlack text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack z-10">Archived</div>
+                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink">
+                    <img src="assets/image_80c806.jpg" alt="Pink Gingham Strawberry Vest" class="w-full h-full object-cover">
                 </div>
                 <div class="flex flex-col mt-auto">
                     <span class="uppercase font-bold text-lg leading-tight mb-1">Gingham Strawberry Vest</span>
-                    <span class="font-bold text-leafGreen text-xl mb-3">$110</span>
-                    <button class="add-to-cart-btn bg-brandBlack text-cardWhite border-2 border-brandBlack rounded-xl py-2 font-bold uppercase hover:bg-leafGreen transition-colors" data-name="Gingham Strawberry Vest" data-price="110">Add to Cart</button>
+                    <span class="font-bold text-gray-400 text-sm uppercase">1-of-1 Piece</span>
                 </div>
             </div>
 
             <!-- Trending Item 2 -->
-            <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky flex flex-col relative">
-                <div class="absolute top-2 right-2 bg-bubblegumPink text-brandBlack text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack z-10">New</div>
-                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink cursor-pointer">
-                    <img src="assets/image_80c841.jpg" alt="White Floral Tie-Up Shirt" class="w-full h-full object-cover hover:scale-105 transition-transform">
+            <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky hover:shadow-chunky-hover hover:-translate-y-2 transition-all duration-300 flex flex-col relative cursor-pointer">
+                <div class="absolute top-2 right-2 bg-bubblegumPink text-brandBlack text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack z-10">Available</div>
+                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink">
+                    <img src="assets/image_80c841.jpg" alt="White Floral Tie-Up Shirt" class="w-full h-full object-cover">
                 </div>
                 <div class="flex flex-col mt-auto">
                     <span class="uppercase font-bold text-lg leading-tight mb-1">Floral Tie-Up Shirt</span>
-                    <span class="font-bold text-papayaOrange text-xl mb-3">$85</span>
-                    <button class="add-to-cart-btn bg-brandBlack text-cardWhite border-2 border-brandBlack rounded-xl py-2 font-bold uppercase hover:bg-papayaOrange transition-colors" data-name="Floral Tie-Up Shirt" data-price="85">Add to Cart</button>
+                    <span class="font-bold text-leafGreen text-sm uppercase">View Details &rarr;</span>
                 </div>
             </div>
 
             <!-- Trending Item 3 -->
-            <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky flex flex-col relative">
-                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink cursor-pointer">
-                    <img src="assets/image_80c825.jpg" alt="Airplane Felt Shirt" class="w-full h-full object-cover hover:scale-105 transition-transform">
+            <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky hover:shadow-chunky-hover hover:-translate-y-2 transition-all duration-300 flex flex-col relative cursor-pointer">
+                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink">
+                    <img src="assets/image_80c825.jpg" alt="Airplane Felt Shirt" class="w-full h-full object-cover">
                 </div>
                 <div class="flex flex-col mt-auto">
                     <span class="uppercase font-bold text-lg leading-tight mb-1">Airplane Felt Shirt</span>
-                    <span class="font-bold text-strawberryRed text-xl mb-3">$95</span>
-                    <button class="add-to-cart-btn bg-brandBlack text-cardWhite border-2 border-brandBlack rounded-xl py-2 font-bold uppercase hover:bg-strawberryRed transition-colors" data-name="Airplane Felt Shirt" data-price="95">Add to Cart</button>
+                    <span class="font-bold text-papayaOrange text-sm uppercase">View Details &rarr;</span>
                 </div>
             </div>
 
              <!-- Trending Item 4 -->
-             <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky flex flex-col relative">
-                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink cursor-pointer">
-                    <img src="assets/image_80c7c8.jpg" alt="Pink Collar Striped Shirt" class="w-full h-full object-cover hover:scale-105 transition-transform">
+             <div class="snap-start flex-shrink-0 w-72 md:w-80 group product-card bg-cardWhite border-4 border-brandBlack rounded-2xl p-4 shadow-chunky hover:shadow-chunky-hover hover:-translate-y-2 transition-all duration-300 flex flex-col relative cursor-pointer">
+                <div class="aspect-[4/5] overflow-hidden rounded-xl border-2 border-brandBlack mb-4 relative bg-bubblegumPink">
+                    <img src="assets/image_80c7c8.jpg" alt="Pink Collar Striped Shirt" class="w-full h-full object-cover">
                 </div>
                 <div class="flex flex-col mt-auto">
                     <span class="uppercase font-bold text-lg leading-tight mb-1">Pink Collar Striped Shirt</span>
-                    <span class="font-bold text-leafGreen text-xl mb-3">$80</span>
-                    <button class="add-to-cart-btn bg-brandBlack text-cardWhite border-2 border-brandBlack rounded-xl py-2 font-bold uppercase hover:bg-leafGreen transition-colors" data-name="Pink Collar Striped Shirt" data-price="80">Add to Cart</button>
+                    <span class="font-bold text-strawberryRed text-sm uppercase">View Details &rarr;</span>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- 3. NIKE STYLE: Shop By Category -->
+    <!-- 3. Shop By Category -->
     <section class="py-16 px-6 md:px-10 max-w-[1600px] mx-auto">
-        <h2 class="text-3xl md:text-5xl uppercase font-bold mb-10 tracking-wide text-brandBlack">Shop By Category 🧩</h2>
+        <h2 class="text-3xl md:text-5xl uppercase font-bold mb-10 tracking-wide text-brandBlack">Explore Categories 🧩</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
             <!-- Category 1 -->
             <div class="group relative aspect-square md:aspect-[4/5] rounded-3xl border-4 border-brandBlack overflow-hidden shadow-chunky cursor-pointer bg-bubblegumPink">
-                <img src="assets/image_80c7e9.jpg" alt="Shop Patchwork" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="assets/image_80c7e9.jpg" alt="Explore Patchwork" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <div class="absolute inset-0 bg-brandBlack bg-opacity-10 group-hover:bg-opacity-30 transition-all"></div>
                 <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                    <span class="bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full px-6 py-3 uppercase font-bold text-xl shadow-[4px_4px_0_0_#1A1A1A] group-hover:bg-papayaOrange transition-colors">Shop Patchwork</span>
+                    <span class="bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full px-6 py-3 uppercase font-bold text-xl shadow-[4px_4px_0_0_#1A1A1A] group-hover:bg-papayaOrange transition-colors">View Patchwork</span>
                 </div>
             </div>
             
             <!-- Category 2 -->
             <div class="group relative aspect-square md:aspect-[4/5] rounded-3xl border-4 border-brandBlack overflow-hidden shadow-chunky cursor-pointer bg-leafGreen">
-                <img src="assets/image_80c806.jpg" alt="Shop Vests" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="assets/image_80c806.jpg" alt="Explore Vests" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <div class="absolute inset-0 bg-brandBlack bg-opacity-10 group-hover:bg-opacity-30 transition-all"></div>
                 <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                    <span class="bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full px-6 py-3 uppercase font-bold text-xl shadow-[4px_4px_0_0_#1A1A1A] group-hover:bg-bubblegumPink transition-colors">Shop Vests</span>
+                    <span class="bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full px-6 py-3 uppercase font-bold text-xl shadow-[4px_4px_0_0_#1A1A1A] group-hover:bg-bubblegumPink transition-colors">View Vests</span>
                 </div>
             </div>
 
             <!-- Category 3 -->
             <div class="group relative aspect-square md:aspect-[4/5] rounded-3xl border-4 border-brandBlack overflow-hidden shadow-chunky cursor-pointer bg-strawberryRed">
-                <img src="assets/image_80c841.jpg" alt="Shop Applique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="assets/image_80c841.jpg" alt="Explore Applique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <div class="absolute inset-0 bg-brandBlack bg-opacity-10 group-hover:bg-opacity-30 transition-all"></div>
                 <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                    <span class="bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full px-6 py-3 uppercase font-bold text-xl shadow-[4px_4px_0_0_#1A1A1A] group-hover:bg-leafGreen transition-colors">Shop Appliqué</span>
+                    <span class="bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full px-6 py-3 uppercase font-bold text-xl shadow-[4px_4px_0_0_#1A1A1A] group-hover:bg-leafGreen transition-colors">View Appliqué</span>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- 4. Featured Spotlight Section -->
-    <section class="py-16 px-6 md:px-10 max-w-7xl mx-auto">
-        <div class="bg-leafGreen border-4 border-brandBlack shadow-chunky rounded-3xl overflow-hidden flex flex-col md:flex-row relative">
-            <div class="absolute -top-4 -right-4 md:right-8 bg-strawberryRed text-white text-lg font-bold uppercase py-3 px-8 rounded-full border-4 border-brandBlack shadow-chunky transform rotate-12 z-20">
-                1-of-1 Piece!
-            </div>
-            <div class="p-10 md:p-16 flex-1 flex flex-col justify-center">
-                <h2 class="text-4xl md:text-6xl uppercase font-bold text-cardWhite mb-4 drop-shadow-[3px_3px_0_rgba(26,26,26,1)] leading-tight">
-                    The Patchwork Project
-                </h2>
-                <p class="text-xl text-brandBlack font-semibold mb-8 max-w-md">
-                    Every piece is cut, sewn, and reworked by hand. No two items are ever exactly the same. Grab this masterpiece before it's gone forever.
-                </p>
-                <a href="#" class="self-start bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-full uppercase font-bold text-lg py-3 px-8 shadow-chunky hover:shadow-chunky-hover hover:bg-bubblegumPink hover:-translate-y-1 transition-all duration-200">
-                    Explore Patchwork
-                </a>
-            </div>
-            <div class="flex-1 bg-brandYellow border-t-4 md:border-t-0 md:border-l-4 border-brandBlack relative">
-                <img src="assets/image_80c7e9.jpg" alt="Featured Patchwork Shirt" class="w-full h-full object-cover min-h-[350px]">
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide-out Cart Sidebar & Overlay (Remains unchanged but pushed to the bottom of the structure) -->
-    <div id="cart-overlay" class="fixed inset-0 bg-brandBlack bg-opacity-60 hidden z-[90] backdrop-blur-sm transition-opacity"></div>
-    
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-cardWhite border-l-4 border-brandBlack transform translate-x-full transition-transform duration-300 z-[100] flex flex-col shadow-[-8px_0_0_0_#1A1A1A]">
-        <div class="p-6 border-b-4 border-brandBlack flex justify-between items-center bg-brandYellow">
-            <h2 class="text-2xl uppercase font-bold text-brandBlack">Your Cart 🛒</h2>
-            <button id="close-cart" class="text-4xl font-bold hover:text-strawberryRed leading-none">&times;</button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-gridGray">
-            <p class="text-center text-gray-400 font-bold uppercase mt-10">Your cart is empty.</p>
-        </div>
-        <div class="p-6 border-t-4 border-brandBlack bg-bubblegumPink">
-            <div class="flex justify-between text-2xl font-bold uppercase mb-6 text-brandBlack">
-                <span>Total:</span>
-                <span id="cart-total">$0</span>
-            </div>
-            <button class="w-full bg-brandBlack text-cardWhite border-4 border-brandBlack rounded-full py-4 font-bold uppercase text-xl shadow-chunky hover:shadow-chunky-hover hover:bg-papayaOrange hover:text-brandBlack hover:-translate-y-1 transition-all duration-200">
-                Checkout
-            </button>
-        </div>
-    </div>
 
     <!-- Custom JS -->
     <script src="public/script.js"></script>
