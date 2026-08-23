@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papaya CMS | Admin Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandYellow: '#FFF2C5',
+                        brandBlack: '#1A1A1A',
+                        cardWhite: '#FFFFFF',
+                        strawberryRed: '#E83D3A',
+                        papayaOrange: '#FF9800',
+                        leafGreen: '#4CAF50',
+                        bubblegumPink: '#FF99C8',
+                        gridGray: '#F4F4F4',
+                    },
+                    fontFamily: {
+                        sans: ['"Fredoka"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'chunky': '4px 4px 0px 0px #1A1A1A',
+                        'chunky-sm': '2px 2px 0px 0px #1A1A1A',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-gridGray text-brandBlack antialiased flex h-screen overflow-hidden font-normal">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-brandYellow border-r-4 border-brandBlack flex flex-col h-full z-20">
+        <div class="p-6 border-b-4 border-brandBlack bg-cardWhite">
+            <h1 class="text-2xl font-bold uppercase tracking-widest flex items-center gap-2">
+                Papaya <span class="text-xl">🛠️</span>
+            </h1>
+            <p class="text-xs font-semibold text-gray-500 uppercase mt-1">Lookbook CMS</p>
+        </div>
+        
+        <nav class="flex-1 p-4 flex flex-col gap-2 font-medium">
+            <a href="#" class="px-4 py-3 uppercase text-brandBlack hover:bg-bubblegumPink border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Dashboard</a>
+            <a href="#" class="px-4 py-3 font-bold uppercase text-cardWhite bg-brandBlack border-2 border-brandBlack rounded-xl shadow-chunky-sm transition-all">Catalog</a>
+            <a href="#" class="px-4 py-3 uppercase text-brandBlack hover:bg-papayaOrange border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Categories</a>
+            <a href="#" class="px-4 py-3 uppercase text-brandBlack hover:bg-leafGreen border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Settings</a>
+        </nav>
+
+        <div class="p-4 border-t-4 border-brandBlack bg-cardWhite">
+            <button class="w-full px-4 py-3 font-bold uppercase text-white bg-strawberryRed border-2 border-brandBlack rounded-xl shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky transition-all text-center">
+                Logout &rarr;
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-full bg-gridGray overflow-y-auto relative">
+        
+        <!-- Header -->
+        <header class="bg-cardWhite border-b-4 border-brandBlack px-8 py-6 flex justify-between items-center sticky top-0 z-10">
+            <h2 class="text-3xl font-bold uppercase tracking-wide drop-shadow-[2px_2px_0_var(--tw-shadow-color)] shadow-bubblegumPink">Manage Catalog</h2>
+            <button class="bg-leafGreen text-cardWhite border-2 border-brandBlack rounded-xl uppercase font-bold text-sm py-3 px-6 shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-papayaOrange hover:text-brandBlack transition-all">
+                + Add New Piece
+            </button>
+        </header>
+
+        <!-- Content Body -->
+        <div class="p-8">
+            
+            <!-- Filters / Search -->
+            <div class="flex justify-between items-center mb-6">
+                <input type="text" placeholder="Search pieces..." class="w-1/3 p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm">
+                <div class="flex gap-4">
+                    <select class="p-3 border-4 border-brandBlack rounded-xl font-medium text-sm bg-cardWhite cursor-pointer focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm hover:bg-brandYellow transition-colors">
+                        <option>All Categories</option>
+                        <option>Patchwork</option>
+                        <option>Appliqué</option>
+                        <option>Vests</option>
+                    </select>
+                    <select class="p-3 border-4 border-brandBlack rounded-xl font-medium text-sm bg-cardWhite cursor-pointer focus:outline-none focus:ring-4 focus:ring-leafGreen shadow-chunky-sm hover:bg-brandYellow transition-colors">
+                        <option>All Statuses</option>
+                        <option>Available</option>
+                        <option>Archived</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Data Table Container -->
+            <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-bubblegumPink border-b-4 border-brandBlack uppercase text-sm font-semibold">
+                            <th class="p-4 border-r-4 border-brandBlack w-16 text-center">ID</th>
+                            <th class="p-4 border-r-4 border-brandBlack w-24">Image</th>
+                            <th class="p-4 border-r-4 border-brandBlack">Piece Name</th>
+                            <th class="p-4 border-r-4 border-brandBlack">Category</th>
+                            <th class="p-4 border-r-4 border-brandBlack">Status</th>
+                            <th class="p-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1 -->
+                        <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors cursor-pointer group">
+                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">001</td>
+                            <td class="p-4 border-r-4 border-brandBlack">
+                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
+                                    <img src="assets/image_80c841.jpg" alt="Floral Tie-Up Shirt" class="w-full h-full object-cover">
+                                </div>
+                            </td>
+                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Floral Tie-Up Shirt</td>
+                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Appliqué</td>
+                            <td class="p-4 border-r-4 border-brandBlack">
+                                <span class="bg-leafGreen text-white text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Available</span>
+                            </td>
+                            <td class="p-4 flex justify-center gap-2 items-center h-full">
+                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
+                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors cursor-pointer group">
+                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">002</td>
+                            <td class="p-4 border-r-4 border-brandBlack">
+                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
+                                    <img src="assets/image_80c806.jpg" alt="Gingham Strawberry Vest" class="w-full h-full object-cover">
+                                </div>
+                            </td>
+                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Gingham Strawberry Vest</td>
+                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Vests</td>
+                            <td class="p-4 border-r-4 border-brandBlack">
+                                <span class="bg-cardWhite text-brandBlack text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Archived</span>
+                            </td>
+                            <td class="p-4 flex justify-center gap-2 items-center h-full">
+                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
+                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-brandYellow transition-colors cursor-pointer group">
+                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">003</td>
+                            <td class="p-4 border-r-4 border-brandBlack">
+                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
+                                    <img src="assets/image_80c7e9.jpg" alt="Mixed Patchwork Shirt" class="w-full h-full object-cover">
+                                </div>
+                            </td>
+                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Mixed Patchwork Shirt</td>
+                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Patchwork</td>
+                            <td class="p-4 border-r-4 border-brandBlack">
+                                <span class="bg-leafGreen text-white text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Available</span>
+                            </td>
+                            <td class="p-4 flex justify-center gap-2 items-center h-full">
+                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
+                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-6">
+                <span class="font-normal text-sm bg-cardWhite border-2 border-brandBlack px-3 py-1 rounded shadow-chunky-sm">Showing 1-3 of 24 pieces</span>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 border-4 border-brandBlack rounded-lg bg-cardWhite font-semibold uppercase hover:bg-papayaOrange hover:-translate-y-1 shadow-chunky hover:shadow-chunky-hover transition-all">&larr; Prev</button>
+                    <button class="px-4 py-2 border-4 border-brandBlack rounded-lg bg-cardWhite font-semibold uppercase hover:bg-papayaOrange hover:-translate-y-1 shadow-chunky hover:shadow-chunky-hover transition-all">Next &rarr;</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
