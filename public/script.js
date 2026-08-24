@@ -3,25 +3,105 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Papaya Reworks storefront initialized.');
 
+    // --- EMAIL ORDER FORM LOGIC ---
+    const localEmailTemplate = `Papaya Order Form
+
+Hi! Kindly fill out the details below, and we’ll send you the complete order breakdown.
+
+• Name:
+• Contact Number:
+• Complete Address:
+• Product/Design:
+• Size:
+
+Payment
+• GCash
+• BPI
+• RCBC
+
+Shipping
+• J&T Express
+• Lalamove
+
+Inventory Location (SJDM, Bulacan) Strictly no cancellation of confirmed orders. Thank you!`;
+
+    const intlEmailTemplate = `Papaya International Order Form
+
+Hi! Thank you for your interest in Papaya. Kindly fill out the details below, and we’ll send you the total order breakdown, including your DHL shipping fee.
+
+• Full Name:
+• Contact Number:
+• Country:
+• Complete Shipping Address:
+• Postal/ZIP Code:
+• Product/Design:
+• Size:
+
+Payment Method Wise Bank Transfer
+
+Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please double-check your details before submitting. Strictly no cancellation of confirmed orders. Thank you!`;
+
+    // Dropdown Elements
+    const gmailToggle = document.getElementById('gmail-toggle');
+    const gmailDropdown = document.getElementById('gmail-dropdown');
+    const localOrderBtn = document.getElementById('local-order-btn');
+    const intlOrderBtn = document.getElementById('intl-order-btn');
+    const targetEmail = "papayareworks@gmail.com";
+
+    // Toggle Dropdown Visibility
+    if (gmailToggle && gmailDropdown) {
+        gmailToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevents click from bubbling up
+            gmailDropdown.classList.toggle('hidden');
+            gmailDropdown.classList.toggle('flex');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!gmailToggle.contains(e.target) && !gmailDropdown.contains(e.target)) {
+                gmailDropdown.classList.add('hidden');
+                gmailDropdown.classList.remove('flex');
+            }
+        });
+    }
+
+    // Email Triggers
+    if (localOrderBtn) {
+        localOrderBtn.addEventListener('click', () => {
+            const subject = encodeURIComponent("Papaya Reworks: Local Order Form");
+            const body = encodeURIComponent(localEmailTemplate);
+            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+        });
+    }
+
+    if (intlOrderBtn) {
+        intlOrderBtn.addEventListener('click', () => {
+            const subject = encodeURIComponent("Papaya Reworks: International Order Form");
+            const body = encodeURIComponent(intlEmailTemplate);
+            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+        });
+    }
+
+
+    // --- CATALOG & UI LOGIC ---
+
     // 1. THE JSON "DATABASE"
-    // Added 4 new items (IDs 13-16) and set them as featured to test the scroll
     const catalogData = [
-        { id: 1, name: "Checkered Rework Top", category: "Patchwork", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
-        { id: 2, name: "Starry Appliqué Vest", category: "Vests", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
-        { id: 3, name: "Vintage Graphic Crop", category: "Patchwork", image: "assets/1000020776.jpg", status: "Available", isFeatured: true, isNew: true },
-        { id: 4, name: "Distressed Denim Halter", category: "Appliqué", image: "assets/1000020773.jpg", status: "Available", isFeatured: true, isNew: false },
-        { id: 5, name: "Upcycled Denim Jacket", category: "Patchwork", image: "assets/1000020760.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 6, name: "Reworked Flannel Shirt", category: "Patchwork", image: "assets/1000020764.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 7, name: "Graphic Patchwork Hoodie", category: "Patchwork", image: "assets/1000020769.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 1, name: "Checkered Rework Top", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
+        { id: 2, name: "Starry Appliqué Vest", category: "Appliqué", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
+        { id: 3, name: "Vintage Graphic Crop", category: "Different Artist", image: "assets/1000020776.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 4, name: "Distressed Denim Halter", category: "Reverie Collection", image: "assets/1000020773.jpg", status: "Available", isFeatured: true, isNew: false },
+        { id: 5, name: "Upcycled Denim Jacket", category: "Different Artist", image: "assets/1000020760.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 6, name: "Floral Tie-Up Shirt", category: "Reverie Collection", image: "assets/1000020764.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 8, name: "Strawberry Motif Tee", category: "Appliqué", image: "assets/1000020774.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 9, name: "Colorblock Button-Up", category: "Patchwork", image: "assets/1000020755.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 9, name: "Colorblock Button-Up", category: "Different Artist", image: "assets/1000020755.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 10, name: "Cropped Utility Jacket", category: "Appliqué", image: "assets/1000020758.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 11, name: "Fleece Contrast Zip", category: "Vests", image: "assets/1000020761.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 12, name: "Oversized Stitch Sweater", category: "Patchwork", image: "assets/1000020765.jpg", status: "Archived", isFeatured: false, isNew: false },
-        { id: 13, name: "Spliced Band Tee", category: "Patchwork", image: "assets/1000020775.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 11, name: "Fleece Contrast Zip", category: "Different Artist", image: "assets/1000020761.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 12, name: "Oversized Stitch Sweater", category: "Appliqué", image: "assets/1000020765.jpg", status: "Archived", isFeatured: false, isNew: false },
+        { id: 13, name: "Spliced Band Tee", category: "Different Artist", image: "assets/1000020775.jpg", status: "Available", isFeatured: true, isNew: true },
         { id: 14, name: "Teddy Bear Zip-Up", category: "Appliqué", image: "assets/1000020777.jpg", status: "Archived", isFeatured: true, isNew: false },
-        { id: 15, name: "Two-Tone Corduroy", category: "Patchwork", image: "assets/1000020771.jpg", status: "Available", isFeatured: true, isNew: true },
-        { id: 16, name: "Puffer Vest Rebuild", category: "Vests", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
+        { id: 15, name: "Corset String Halter", category: "Reverie Collection", image: "assets/1000020771.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 16, name: "Puffer Vest Rebuild", category: "Appliqué", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
     ];
 
     // DOM Elements
@@ -67,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const featuredItems = catalogData.filter(item => item.isFeatured === true);
         featuredContainer.innerHTML = featuredItems.map(item => createProductCard(item, true)).join('');
 
-        // Wire up the arrow buttons to slide the carousel
         if (scrollLeftBtn && scrollRightBtn) {
             scrollLeftBtn.addEventListener('click', () => {
                 featuredContainer.scrollBy({ left: -320, behavior: 'smooth' });
@@ -87,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#catalog h2').innerText = `Full Archive 🗃️`;
         } else if (categoryFilter) {
             itemsToRender = catalogData.filter(item => item.category === categoryFilter);
-            document.querySelector('#catalog h2').innerText = `${categoryFilter} Collection 💧`;
+            document.querySelector('#catalog h2').innerText = `${categoryFilter} 💧`;
         } else {
             itemsToRender = catalogData.filter(item => item.isFeatured === false);
             document.querySelector('#catalog h2').innerText = `Latest Drops 💧`;
@@ -103,20 +182,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. ATTACH EVENT LISTENERS
     const setupInteractions = () => {
-        // Category Buttons
         const categoryButtons = document.querySelectorAll('.category-btn');
         categoryButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 const buttonText = button.querySelector('span').innerText;
-                const category = buttonText.replace('VIEW ', ''); 
+                const category = buttonText.replace('VIEW ', '').trim(); 
                 
                 renderLatestDrops(category);
                 document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // View Full Archive Button
         if (viewArchiveBtn) {
             viewArchiveBtn.addEventListener('click', (e) => {
                 e.preventDefault();
