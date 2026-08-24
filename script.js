@@ -3,8 +3,89 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Papaya Reworks storefront initialized.');
 
+    // --- EMAIL ORDER FORM LOGIC ---
+    const localEmailTemplate = `Papaya Order Form
+
+Hi! Kindly fill out the details below, and we’ll send you the complete order breakdown.
+
+• Name:
+• Contact Number:
+• Complete Address:
+• Product/Design:
+• Size:
+
+Payment
+• GCash
+• BPI
+• RCBC
+
+Shipping
+• J&T Express
+• Lalamove
+
+Inventory Location (SJDM, Bulacan) Strictly no cancellation of confirmed orders. Thank you!`;
+
+    const intlEmailTemplate = `Papaya International Order Form
+
+Hi! Thank you for your interest in Papaya. Kindly fill out the details below, and we’ll send you the total order breakdown, including your DHL shipping fee.
+
+• Full Name:
+• Contact Number:
+• Country:
+• Complete Shipping Address:
+• Postal/ZIP Code:
+• Product/Design:
+• Size:
+
+Payment Method Wise Bank Transfer
+
+Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please double-check your details before submitting. Strictly no cancellation of confirmed orders. Thank you!`;
+
+    // Dropdown Elements
+    const gmailToggle = document.getElementById('gmail-toggle');
+    const gmailDropdown = document.getElementById('gmail-dropdown');
+    const localOrderBtn = document.getElementById('local-order-btn');
+    const intlOrderBtn = document.getElementById('intl-order-btn');
+    const targetEmail = "papayareworks@gmail.com";
+
+    // Toggle Dropdown Visibility
+    if (gmailToggle && gmailDropdown) {
+        gmailToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevents click from bubbling up
+            gmailDropdown.classList.toggle('hidden');
+            gmailDropdown.classList.toggle('flex');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!gmailToggle.contains(e.target) && !gmailDropdown.contains(e.target)) {
+                gmailDropdown.classList.add('hidden');
+                gmailDropdown.classList.remove('flex');
+            }
+        });
+    }
+
+    // Email Triggers
+    if (localOrderBtn) {
+        localOrderBtn.addEventListener('click', () => {
+            const subject = encodeURIComponent("Papaya Reworks: Local Order Form");
+            const body = encodeURIComponent(localEmailTemplate);
+            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+        });
+    }
+
+    if (intlOrderBtn) {
+        intlOrderBtn.addEventListener('click', () => {
+            const subject = encodeURIComponent("Papaya Reworks: International Order Form");
+            const body = encodeURIComponent(intlEmailTemplate);
+            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+        });
+    }
+
+
+    // --- CATALOG & UI LOGIC ---
+
     // 1. THE JSON "DATABASE"
-    // Removed "Graphic Patchwork Hoodie"
     const catalogData = [
         { id: 1, name: "Checkered Rework Top", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
         { id: 2, name: "Starry Appliqué Vest", category: "Appliqué", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },

@@ -68,7 +68,20 @@
             <!-- Temporarily hidden: Search -->
             <!-- <li class="cursor-pointer hover:text-papayaOrange transition-colors">Search</li> -->
             <li class="cursor-pointer hover:text-strawberryRed transition-colors"><a href="https://instagram.com/papayareworks" target="_blank">IG</a></li>
-            <li class="cursor-pointer hover:text-bubblegumPink transition-colors"><a href="mailto:papayareworks@gmail.com">Gmail</a></li>
+            
+            <!-- Dynamic Gmail Dropdown -->
+            <li class="relative cursor-pointer transition-colors group">
+                <span id="gmail-toggle" class="hover:text-bubblegumPink transition-colors">Gmail &darr;</span>
+                
+                <div id="gmail-dropdown" class="absolute right-0 mt-4 w-56 bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky hidden flex-col z-50 overflow-hidden">
+                    <button id="local-order-btn" class="px-4 py-4 text-left font-bold uppercase text-brandBlack hover:bg-papayaOrange border-b-4 border-brandBlack transition-colors text-sm">
+                        Local Order
+                    </button>
+                    <button id="intl-order-btn" class="px-4 py-4 text-left font-bold uppercase text-brandBlack hover:bg-bubblegumPink transition-colors text-sm">
+                        Intl Order
+                    </button>
+                </div>
+            </li>
         </ul>
     </header>
 
@@ -95,7 +108,7 @@
             </div>
         </div>
         
-        <!-- Horizontal Scroll Container (Populated by JS) -->
+        <!-- Horizontal Scroll Container -->
         <div id="featured-container" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar scroll-smooth">
             <!-- JS will inject featured cards here -->
         </div>
