@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Papaya Reworks storefront initialized.');
 
     // 1. THE JSON "DATABASE"
-    // Updated categories to match the new structure: Different Artist, Reverie Collection, Appliqué
+    // Removed "Graphic Patchwork Hoodie"
     const catalogData = [
         { id: 1, name: "Checkered Rework Top", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
         { id: 2, name: "Starry Appliqué Vest", category: "Appliqué", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 4, name: "Distressed Denim Halter", category: "Reverie Collection", image: "assets/1000020773.jpg", status: "Available", isFeatured: true, isNew: false },
         { id: 5, name: "Upcycled Denim Jacket", category: "Different Artist", image: "assets/1000020760.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 6, name: "Floral Tie-Up Shirt", category: "Reverie Collection", image: "assets/1000020764.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 7, name: "Graphic Patchwork Hoodie", category: "Different Artist", image: "assets/1000020769.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 8, name: "Strawberry Motif Tee", category: "Appliqué", image: "assets/1000020774.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 9, name: "Colorblock Button-Up", category: "Different Artist", image: "assets/1000020755.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 10, name: "Cropped Utility Jacket", category: "Appliqué", image: "assets/1000020758.jpg", status: "Available", isFeatured: false, isNew: true },
@@ -107,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 const buttonText = button.querySelector('span').innerText;
-                // Safely remove 'VIEW ' to get the exact category string
                 const category = buttonText.replace('VIEW ', '').trim(); 
                 
                 renderLatestDrops(category);
