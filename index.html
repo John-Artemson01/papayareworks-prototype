@@ -67,8 +67,21 @@
         <ul class="flex gap-8 text-base uppercase font-semibold">
             <!-- Temporarily hidden: Search -->
             <!-- <li class="cursor-pointer hover:text-papayaOrange transition-colors">Search</li> -->
-            <li class="cursor-pointer hover:text-strawberryRed transition-colors"><a href="https://instagram.com/papayareworks" target="_blank">IG</a></li>
             
+            <!-- Dynamic IG Dropdown -->
+            <li class="relative cursor-pointer transition-colors group">
+                <span id="ig-toggle" class="hover:text-strawberryRed transition-colors">IG &darr;</span>
+                
+                <div id="ig-dropdown" class="absolute right-0 mt-4 w-56 bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky hidden flex-col z-50 overflow-hidden">
+                    <button id="ig-local-btn" class="px-4 py-4 text-left font-bold uppercase text-brandBlack hover:bg-papayaOrange border-b-4 border-brandBlack transition-colors text-sm">
+                        Local Order 
+                    </button>
+                    <button id="ig-intl-btn" class="px-4 py-4 text-left font-bold uppercase text-brandBlack hover:bg-bubblegumPink transition-colors text-sm">
+                        Intl Order 
+                    </button>
+                </div>
+            </li>
+
             <!-- Dynamic Gmail Dropdown -->
             <li class="relative cursor-pointer transition-colors group">
                 <span id="gmail-toggle" class="hover:text-bubblegumPink transition-colors">Gmail &darr;</span>
@@ -108,7 +121,7 @@
             </div>
         </div>
         
-        <!-- Horizontal Scroll Container -->
+        <!-- Horizontal Scroll Container (Populated by JS) -->
         <div id="featured-container" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar scroll-smooth">
             <!-- JS will inject featured cards here -->
         </div>
@@ -164,6 +177,23 @@
             </button>
         </div>
     </section>
+
+    <!-- 5. IG Copy Modal -->
+    <div id="ig-modal" class="fixed inset-0 bg-brandBlack/80 z-50 hidden flex-col items-center justify-center p-4">
+        <div class="bg-cardWhite border-4 border-brandBlack rounded-3xl p-8 max-w-sm w-full shadow-[8px_8px_0_0_#FF9800] text-center transform transition-all relative">
+            <div class="text-5xl mb-4">📋</div>
+            <h3 class="text-2xl font-bold uppercase tracking-wide mb-2 text-brandBlack">Form Copied!</h3>
+            <p class="font-medium text-gray-700 mb-8 leading-relaxed">The order form has been copied to your clipboard. Paste it directly into our DMs to order.</p>
+            
+            <button id="ig-modal-btn" class="w-full bg-bubblegumPink text-brandBlack border-4 border-brandBlack rounded-full py-4 font-bold uppercase text-lg shadow-chunky-sm hover:shadow-chunky hover:-translate-y-1 hover:bg-papayaOrange transition-all mb-4">
+                Go To Instagram &rarr;
+            </button>
+            
+            <button id="ig-modal-close" class="text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-strawberryRed transition-colors underline underline-offset-4">
+                Cancel
+            </button>
+        </div>
+    </div>
 
     <!-- Custom JS -->
     <script src="public/script.js"></script>

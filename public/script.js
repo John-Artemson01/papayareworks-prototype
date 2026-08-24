@@ -3,8 +3,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Papaya Reworks storefront initialized.');
 
-    // --- EMAIL ORDER FORM LOGIC ---
-    const localEmailTemplate = `Papaya Order Form
+    // --- EMAIL / IG ORDER FORM LOGIC ---
+    const localEmailTemplate = `🌼 Papaya Order Form
 
 Hi! Kindly fill out the details below, and we’ll send you the complete order breakdown.
 
@@ -23,9 +23,11 @@ Shipping
 • J&T Express
 • Lalamove
 
-Inventory Location (SJDM, Bulacan) Strictly no cancellation of confirmed orders. Thank you!`;
+Inventory Location (SJDM, Bulacan)
 
-    const intlEmailTemplate = `Papaya International Order Form
+🫶 Strictly no cancellation of confirmed orders. Thank you!`;
+
+    const intlEmailTemplate = `🌍 Papaya International Order Form
 
 Hi! Thank you for your interest in Papaya. Kindly fill out the details below, and we’ll send you the total order breakdown, including your DHL shipping fee.
 
@@ -37,9 +39,16 @@ Hi! Thank you for your interest in Papaya. Kindly fill out the details below, an
 • Product/Design:
 • Size:
 
-Payment Method Wise Bank Transfer
+Payment Method
+▫ Wise
+▫ Bank Transfer
 
-Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please double-check your details before submitting. Strictly no cancellation of confirmed orders. Thank you!`;
+Shipping
+▫ DHL Express (Worldwide)
+
+📍 Inventory Location: Manila, Philippines
+
+🫶 Please double-check your details before submitting. Strictly no cancellation of confirmed orders. Thank you!`;
 
     // Dropdown Elements
     const gmailToggle = document.getElementById('gmail-toggle');
@@ -48,24 +57,57 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
     const intlOrderBtn = document.getElementById('intl-order-btn');
     const targetEmail = "papayareworks@gmail.com";
 
-    // Toggle Dropdown Visibility
+    // IG Elements
+    const igToggle = document.getElementById('ig-toggle');
+    const igDropdown = document.getElementById('ig-dropdown');
+    const igLocalBtn = document.getElementById('ig-local-btn');
+    const igIntlBtn = document.getElementById('ig-intl-btn');
+    const igDirectLink = "https://ig.me/m/papayareworks";
+    
+    // Modal Elements
+    const igModal = document.getElementById('ig-modal');
+    const igModalBtn = document.getElementById('ig-modal-btn');
+    const igModalClose = document.getElementById('ig-modal-close');
+
+    // Toggle Gmail Dropdown Visibility
     if (gmailToggle && gmailDropdown) {
         gmailToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevents click from bubbling up
+            e.stopPropagation();
             gmailDropdown.classList.toggle('hidden');
             gmailDropdown.classList.toggle('flex');
+            if (igDropdown) {
+                igDropdown.classList.add('hidden');
+                igDropdown.classList.remove('flex');
+            }
         });
+    }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!gmailToggle.contains(e.target) && !gmailDropdown.contains(e.target)) {
+    // Toggle IG Dropdown Visibility
+    if (igToggle && igDropdown) {
+        igToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            igDropdown.classList.toggle('hidden');
+            igDropdown.classList.toggle('flex');
+            if (gmailDropdown) {
                 gmailDropdown.classList.add('hidden');
                 gmailDropdown.classList.remove('flex');
             }
         });
     }
 
-    // Email Triggers
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (gmailToggle && !gmailToggle.contains(e.target) && !gmailDropdown.contains(e.target)) {
+            gmailDropdown.classList.add('hidden');
+            gmailDropdown.classList.remove('flex');
+        }
+        if (igToggle && !igToggle.contains(e.target) && !igDropdown.contains(e.target)) {
+            igDropdown.classList.add('hidden');
+            igDropdown.classList.remove('flex');
+        }
+    });
+
+    // Gmail Email Triggers
     if (localOrderBtn) {
         localOrderBtn.addEventListener('click', () => {
             const subject = encodeURIComponent("Papaya Reworks: Local Order Form");
@@ -82,10 +124,47 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
         });
     }
 
+    // IG Clipboard & Modal Logic
+    const copyAndShowIGModal = (templateText) => {
+        navigator.clipboard.writeText(templateText).then(() => {
+            // Show modal instead of native browser alert
+            if(igModal) {
+                igModal.classList.remove('hidden');
+                igModal.classList.add('flex');
+            }
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            window.open(igDirectLink, '_blank');
+        });
+    };
+
+    if (igLocalBtn) {
+        igLocalBtn.addEventListener('click', () => copyAndShowIGModal(localEmailTemplate));
+    }
+
+    if (igIntlBtn) {
+        igIntlBtn.addEventListener('click', () => copyAndShowIGModal(intlEmailTemplate));
+    }
+
+    // Modal Interactions
+    if (igModalBtn) {
+        igModalBtn.addEventListener('click', () => {
+            window.open(igDirectLink, '_blank');
+            igModal.classList.add('hidden');
+            igModal.classList.remove('flex');
+        });
+    }
+
+    if (igModalClose) {
+        igModalClose.addEventListener('click', () => {
+            igModal.classList.add('hidden');
+            igModal.classList.remove('flex');
+        });
+    }
+
 
     // --- CATALOG & UI LOGIC ---
 
-    // 1. THE JSON "DATABASE"
     const catalogData = [
         { id: 1, name: "Checkered Rework Top", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
         { id: 2, name: "Starry Appliqué Vest", category: "Appliqué", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
@@ -104,14 +183,12 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
         { id: 16, name: "Puffer Vest Rebuild", category: "Appliqué", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
     ];
 
-    // DOM Elements
     const featuredContainer = document.getElementById('featured-container');
     const latestDropsContainer = document.getElementById('latest-drops-container');
     const scrollLeftBtn = document.getElementById('scroll-left');
     const scrollRightBtn = document.getElementById('scroll-right');
     const viewArchiveBtn = document.getElementById('view-archive-btn');
 
-    // 2. HELPER FUNCTION: GENERATE HTML CARD
     const createProductCard = (product, isHorizontal = false) => {
         let badgeHTML = '';
         if (product.status === 'Archived') {
@@ -142,7 +219,6 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
         `;
     };
 
-    // 3. RENDER FEATURED PIECES & SETUP SCROLLING
     const renderFeatured = () => {
         const featuredItems = catalogData.filter(item => item.isFeatured === true);
         featuredContainer.innerHTML = featuredItems.map(item => createProductCard(item, true)).join('');
@@ -157,7 +233,6 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
         }
     };
 
-    // 4. RENDER LATEST DROPS / ARCHIVE
     const renderLatestDrops = (categoryFilter = null) => {
         let itemsToRender = [];
 
@@ -180,7 +255,6 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
         latestDropsContainer.innerHTML = itemsToRender.map(item => createProductCard(item, false)).join('');
     };
 
-    // 5. ATTACH EVENT LISTENERS
     const setupInteractions = () => {
         const categoryButtons = document.querySelectorAll('.category-btn');
         categoryButtons.forEach(button => {
@@ -203,7 +277,6 @@ Shipping DHL Express (Worldwide) Inventory Location: Manila, Philippines Please 
         }
     };
 
-    // Initialize Everything
     renderFeatured();
     renderLatestDrops(); 
     setupInteractions();
