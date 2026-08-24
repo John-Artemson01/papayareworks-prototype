@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Papaya Reworks storefront initialized.');
 
     // 1. THE JSON "DATABASE"
+    // Added 4 new items (IDs 13-16) and set them as featured to test the scroll
     const catalogData = [
         { id: 1, name: "Checkered Rework Top", category: "Patchwork", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
         { id: 2, name: "Starry Appliqué Vest", category: "Vests", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
@@ -17,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 10, name: "Cropped Utility Jacket", category: "Appliqué", image: "assets/1000020758.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 11, name: "Fleece Contrast Zip", category: "Vests", image: "assets/1000020761.jpg", status: "Available", isFeatured: false, isNew: true },
         { id: 12, name: "Oversized Stitch Sweater", category: "Patchwork", image: "assets/1000020765.jpg", status: "Archived", isFeatured: false, isNew: false },
+        { id: 13, name: "Spliced Band Tee", category: "Patchwork", image: "assets/1000020775.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 14, name: "Teddy Bear Zip-Up", category: "Appliqué", image: "assets/1000020777.jpg", status: "Archived", isFeatured: true, isNew: false },
+        { id: 15, name: "Two-Tone Corduroy", category: "Patchwork", image: "assets/1000020771.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 16, name: "Puffer Vest Rebuild", category: "Vests", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
     ];
 
     // DOM Elements
@@ -73,31 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 4. RENDER LATEST DROPS / ARCHIVE (Handles category filtering and "View All")
+    // 4. RENDER LATEST DROPS / ARCHIVE
     const renderLatestDrops = (categoryFilter = null) => {
         let itemsToRender = [];
 
         if (categoryFilter === 'All') {
-            // Show the entire database when "View Full Archive" is clicked
             itemsToRender = catalogData; 
             document.querySelector('#catalog h2').innerText = `Full Archive 🗃️`;
         } else if (categoryFilter) {
-            // Filter by specific category
             itemsToRender = catalogData.filter(item => item.category === categoryFilter);
             document.querySelector('#catalog h2').innerText = `${categoryFilter} Collection 💧`;
         } else {
-            // Default view: Show non-featured items
             itemsToRender = catalogData.filter(item => item.isFeatured === false);
             document.querySelector('#catalog h2').innerText = `Latest Drops 💧`;
         }
 
-        // Handle empty state if a category has no items
         if (itemsToRender.length === 0) {
             latestDropsContainer.innerHTML = `<p class="col-span-full text-center font-bold text-xl text-gray-500 py-10 uppercase">No pieces found for this category.</p>`;
             return;
         }
 
-        // Inject the HTML into the grid
         latestDropsContainer.innerHTML = itemsToRender.map(item => createProductCard(item, false)).join('');
     };
 
