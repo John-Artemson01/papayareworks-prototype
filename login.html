@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papaya CMS | Login</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandYellow: '#FFF2C5',
+                        brandBlack: '#1A1A1A',
+                        cardWhite: '#FFFFFF',
+                        strawberryRed: '#E83D3A',
+                        papayaOrange: '#FF9800',
+                        leafGreen: '#4CAF50',
+                        bubblegumPink: '#FF99C8',
+                    },
+                    fontFamily: {
+                        sans: ['"Fredoka"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'chunky': '4px 4px 0px 0px #1A1A1A',
+                        'chunky-sm': '2px 2px 0px 0px #1A1A1A',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-brandYellow text-brandBlack antialiased flex items-center justify-center h-screen overflow-hidden font-normal relative">
+
+    <div class="absolute -top-10 -left-10 w-48 h-48 bg-bubblegumPink rounded-full border-4 border-brandBlack z-0"></div>
+    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-papayaOrange rounded-full border-4 border-brandBlack z-0"></div>
+
+    <div class="bg-cardWhite border-4 border-brandBlack rounded-3xl p-10 max-w-sm w-full shadow-[8px_8px_0_0_#1A1A1A] z-10 flex flex-col items-center">
+        
+        <h1 class="text-3xl font-bold uppercase tracking-widest flex items-center gap-2 mb-2">
+            Papaya <span class="text-2xl">🛠️</span>
+        </h1>
+        <p class="text-sm font-semibold text-gray-500 uppercase mb-8 text-center border-b-4 border-brandBlack w-full pb-4">Content Management System</p>
+
+        <div id="login-error" class="hidden w-full bg-strawberryRed text-white font-bold text-xs uppercase p-3 rounded-xl border-2 border-brandBlack mb-4 text-center shadow-chunky-sm">
+            Invalid username or password.
+        </div>
+
+        <form id="login-form" class="w-full flex flex-col gap-5">
+            <div>
+                <label class="block text-sm font-bold uppercase mb-1">Username</label>
+                <input type="text" id="username" required placeholder="admin" class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm bg-gridGray">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-bold uppercase mb-1">Password</label>
+                <input type="password" id="password" required placeholder="••••••••" class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm bg-gridGray">
+            </div>
+
+            <button type="submit" class="mt-4 w-full bg-leafGreen text-cardWhite border-4 border-brandBlack rounded-xl py-4 font-bold text-lg uppercase shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-brandBlack transition-all">
+                Access Dashboard &rarr;
+            </button>
+        </form>
+
+    </div>
+
+    <script src="public/login.js"></script>
+</body>
+</html>

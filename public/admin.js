@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Papaya Reworks Admin initialized.');
 
     // ----------------------------------------------------
+    // 0. PROTOTYPE AUTHENTICATION CHECK
+    // ----------------------------------------------------
+    // If the token is missing, redirect to login and stop script
+    if (sessionStorage.getItem('papaya_auth_token') !== 'true') {
+        window.location.href = 'login.html';
+        return; 
+    }
+
+    // ----------------------------------------------------
     // 1. SIDEBAR NAVIGATION TAB LOGIC
     // ----------------------------------------------------
     const navButtons = document.querySelectorAll('.nav-btn');
@@ -20,21 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const target = btn.getAttribute('data-target');
 
+            // Hide all sections
             Object.values(sections).forEach(sec => {
                 sec.classList.remove('flex');
                 sec.classList.add('hidden');
             });
 
+            // Show selected section
             if (sections[target]) {
                 sections[target].classList.remove('hidden');
                 sections[target].classList.add('flex');
             }
 
+            // Reset tabs
             navButtons.forEach(nav => {
                 nav.classList.remove(...activeClasses);
                 nav.classList.add('text-brandBlack', 'border-transparent');
             });
 
+            // Highlight active tab
             btn.classList.remove('text-brandBlack', 'border-transparent');
             btn.classList.add(...activeClasses);
         });
@@ -42,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------
-    // 2. THE JSON "DATABASE" & CATALOG LOGIC
+    // 2. THE JSON "DATABASE"
     // ----------------------------------------------------
     let catalogData = [
         { id: 1, name: "Classic Patchwork Button Down", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
@@ -61,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 16, name: "Maroon Barong Laced Fleur", category: "Appliqué", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
     ];
 
+    // DOM Elements
     const tableBody = document.getElementById('admin-catalog-body');
     const itemCountDisplay = document.getElementById('admin-item-count');
     
@@ -86,6 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const statActive = document.getElementById('stat-active');
     const statArchived = document.getElementById('stat-archived');
 
+    // ----------------------------------------------------
+    // 3. TABLE & STATS RENDERING
+    // ----------------------------------------------------
     const renderTable = () => {
         tableBody.innerHTML = ''; 
         let activeCount = 0;
@@ -139,13 +156,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         itemCountDisplay.innerText = `Showing ${catalogData.length} pieces`;
         
+        // Update Dashboard Stats
         if(statTotal) statTotal.innerText = catalogData.length;
         if(statActive) statActive.innerText = activeCount;
         if(statArchived) statArchived.innerText = archivedCount;
     };
 
     // ----------------------------------------------------
-    // 3. DELETE FUNCTIONALITY
+    // 4. DELETE FUNCTIONALITY
     // ----------------------------------------------------
     window.deletePiece = (id) => {
         const confirmDelete = confirm("Are you sure you want to delete this piece from the catalog?");
@@ -156,9 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ----------------------------------------------------
-    // 4. IMAGE PREVIEW HANDLERS
+    // 5. IMAGE PREVIEW HANDLERS
     // ----------------------------------------------------
     const setupImagePreview = (inputElement, previewContainer, previewImage) => {
+        if (!inputElement) return;
         inputElement.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
@@ -175,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupImagePreview(editImageInput, editImagePreviewContainer, editImagePreview);
 
     // ----------------------------------------------------
-    // 5. ADD MODAL LOGIC
+    // 6. ADD MODAL LOGIC
     // ----------------------------------------------------
     openAddModalBtn.addEventListener('click', () => {
         addModal.classList.remove('hidden');
@@ -225,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // 6. EDIT MODAL LOGIC
+    // 7. EDIT MODAL LOGIC
     // ----------------------------------------------------
     window.editPiece = (id) => {
         const piece = catalogData.find(p => p.id === id);
@@ -305,6 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Catalog piece updated successfully!");
     });
 
-    // Initial Render
+    // Initial Render Trigger
     renderTable();
 });
