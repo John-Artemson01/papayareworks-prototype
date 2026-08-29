@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Papaya CMS | Admin Dashboard</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -42,7 +40,6 @@
 </head>
 <body class="bg-gridGray text-brandBlack antialiased flex h-screen overflow-hidden font-normal">
 
-    <!-- Sidebar Navigation -->
     <aside class="w-64 bg-brandYellow border-r-4 border-brandBlack flex flex-col h-full z-20">
         <div class="p-6 border-b-4 border-brandBlack bg-cardWhite">
             <h1 class="text-2xl font-bold uppercase tracking-widest flex items-center gap-2">
@@ -51,11 +48,11 @@
             <p class="text-xs font-semibold text-gray-500 uppercase mt-1">Lookbook CMS</p>
         </div>
         
-        <nav class="flex-1 p-4 flex flex-col gap-2 font-medium">
-            <a href="#" class="px-4 py-3 uppercase text-brandBlack hover:bg-bubblegumPink border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Dashboard</a>
-            <a href="#" class="px-4 py-3 font-bold uppercase text-cardWhite bg-brandBlack border-2 border-brandBlack rounded-xl shadow-chunky-sm transition-all">Catalog</a>
-            <a href="#" class="px-4 py-3 uppercase text-brandBlack hover:bg-papayaOrange border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Categories</a>
-            <a href="#" class="px-4 py-3 uppercase text-brandBlack hover:bg-leafGreen border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Settings</a>
+        <nav id="admin-sidebar" class="flex-1 p-4 flex flex-col gap-2 font-medium">
+            <button data-target="dashboard" class="nav-btn w-full px-4 py-3 text-left uppercase text-brandBlack hover:bg-bubblegumPink border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Dashboard</button>
+            <button data-target="catalog" class="nav-btn w-full px-4 py-3 text-left font-bold uppercase text-cardWhite bg-brandBlack border-2 border-brandBlack rounded-xl shadow-chunky-sm transition-all active">Catalog</button>
+            <button data-target="categories" class="nav-btn w-full px-4 py-3 text-left uppercase text-brandBlack hover:bg-papayaOrange border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Categories</button>
+            <button data-target="settings" class="nav-btn w-full px-4 py-3 text-left uppercase text-brandBlack hover:bg-leafGreen border-2 border-transparent hover:border-brandBlack rounded-xl transition-all">Settings</button>
         </nav>
 
         <div class="p-4 border-t-4 border-brandBlack bg-cardWhite">
@@ -65,161 +62,251 @@
         </div>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="flex-1 flex flex-col h-full bg-gridGray overflow-y-auto relative">
         
-        <!-- Header -->
-        <header class="bg-cardWhite border-b-4 border-brandBlack px-8 py-6 flex justify-between items-center sticky top-0 z-10">
-            <h2 class="text-3xl font-bold uppercase tracking-wide drop-shadow-[2px_2px_0_var(--tw-shadow-color)] shadow-bubblegumPink">Manage Catalog</h2>
-            <button class="bg-leafGreen text-cardWhite border-2 border-brandBlack rounded-xl uppercase font-bold text-sm py-3 px-6 shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-papayaOrange hover:text-brandBlack transition-all">
-                + Add New Piece
-            </button>
-        </header>
-
-        <!-- Content Body -->
-        <div class="p-8">
-            
-            <!-- Filters / Search -->
-            <div class="flex justify-between items-center mb-6">
-                <input type="text" placeholder="Search pieces..." class="w-1/3 p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm">
-                <div class="flex gap-4">
-                    <select class="p-3 border-4 border-brandBlack rounded-xl font-medium text-sm bg-cardWhite cursor-pointer focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm hover:bg-brandYellow transition-colors">
-                        <option>All Categories</option>
-                        <option>Patchwork</option>
-                        <option>Appliqué</option>
-                        <option>Vests</option>
-                    </select>
-                    <select class="p-3 border-4 border-brandBlack rounded-xl font-medium text-sm bg-cardWhite cursor-pointer focus:outline-none focus:ring-4 focus:ring-leafGreen shadow-chunky-sm hover:bg-brandYellow transition-colors">
-                        <option>All Statuses</option>
-                        <option>Available</option>
-                        <option>Archived</option>
-                    </select>
+        <section id="section-dashboard" class="hidden flex-col h-full">
+            <header class="bg-cardWhite border-b-4 border-brandBlack px-8 py-6 sticky top-0 z-10">
+                <h2 class="text-3xl font-bold uppercase tracking-wide drop-shadow-[2px_2px_0_var(--tw-shadow-color)] shadow-papayaOrange">Dashboard Overview</h2>
+            </header>
+            <div class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl p-6 shadow-chunky flex flex-col justify-center items-center text-center">
+                        <span class="text-5xl font-bold text-bubblegumPink drop-shadow-[2px_2px_0_#1A1A1A] mb-2" id="stat-total">0</span>
+                        <h3 class="uppercase font-bold text-brandBlack tracking-wide">Total Pieces</h3>
+                    </div>
+                    <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl p-6 shadow-chunky flex flex-col justify-center items-center text-center">
+                        <span class="text-5xl font-bold text-leafGreen drop-shadow-[2px_2px_0_#1A1A1A] mb-2" id="stat-active">0</span>
+                        <h3 class="uppercase font-bold text-brandBlack tracking-wide">Available Drops</h3>
+                    </div>
+                    <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl p-6 shadow-chunky flex flex-col justify-center items-center text-center">
+                        <span class="text-5xl font-bold text-gray-400 drop-shadow-[2px_2px_0_#1A1A1A] mb-2" id="stat-archived">0</span>
+                        <h3 class="uppercase font-bold text-brandBlack tracking-wide">Archived Pieces</h3>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Data Table Container -->
-            <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky overflow-hidden">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-bubblegumPink border-b-4 border-brandBlack uppercase text-sm font-semibold">
-                            <th class="p-4 border-r-4 border-brandBlack w-16 text-center">ID</th>
-                            <th class="p-4 border-r-4 border-brandBlack w-24">Image</th>
-                            <th class="p-4 border-r-4 border-brandBlack">Piece Name</th>
-                            <th class="p-4 border-r-4 border-brandBlack">Category</th>
-                            <th class="p-4 border-r-4 border-brandBlack">Status</th>
-                            <th class="p-4 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Row 1 -->
-                        <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors cursor-pointer group">
-                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">001</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
-                                    <img src="assets/1000020772.jpg" alt="Reworked Top" class="w-full h-full object-cover">
-                                </div>
-                            </td>
-                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Checkered Rework Top</td>
-                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Patchwork</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <span class="bg-leafGreen text-white text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Available</span>
-                            </td>
-                            <td class="p-4 flex justify-center gap-2 items-center h-full">
-                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
-                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
-                            </td>
-                        </tr>
+        <section id="section-catalog" class="flex flex-col h-full">
+            <header class="bg-cardWhite border-b-4 border-brandBlack px-8 py-6 flex justify-between items-center sticky top-0 z-10">
+                <h2 class="text-3xl font-bold uppercase tracking-wide drop-shadow-[2px_2px_0_var(--tw-shadow-color)] shadow-bubblegumPink">Manage Catalog</h2>
+                <button id="open-add-modal-btn" class="bg-leafGreen text-cardWhite border-2 border-brandBlack rounded-xl uppercase font-bold text-sm py-3 px-6 shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-papayaOrange hover:text-brandBlack transition-all">
+                    + Add New Piece
+                </button>
+            </header>
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <input type="text" id="admin-search" placeholder="Search pieces..." class="w-1/3 p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm">
+                    <div class="flex gap-4">
+                        <select class="p-3 border-4 border-brandBlack rounded-xl font-medium text-sm bg-cardWhite cursor-pointer focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm hover:bg-brandYellow transition-colors">
+                            <option>All Categories</option>
+                            <option>Different Artist</option>
+                            <option>Reverie Collection</option>
+                            <option>Appliqué</option>
+                        </select>
+                        <select class="p-3 border-4 border-brandBlack rounded-xl font-medium text-sm bg-cardWhite cursor-pointer focus:outline-none focus:ring-4 focus:ring-leafGreen shadow-chunky-sm hover:bg-brandYellow transition-colors">
+                            <option>All Placements</option>
+                            <option>Featured</option>
+                            <option>Latest Drops</option>
+                        </select>
+                    </div>
+                </div>
 
-                        <!-- Row 2 -->
-                        <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors cursor-pointer group">
-                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">002</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
-                                    <img src="assets/1000020768.jpg" alt="Applique Vest" class="w-full h-full object-cover">
-                                </div>
-                            </td>
-                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Starry Appliqué Vest</td>
-                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Vests</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <span class="bg-cardWhite text-brandBlack text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Archived</span>
-                            </td>
-                            <td class="p-4 flex justify-center gap-2 items-center h-full">
-                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
-                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Row 3 -->
-                        <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors cursor-pointer group">
-                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">003</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
-                                    <img src="assets/1000020776.jpg" alt="Graphic Rework" class="w-full h-full object-cover">
-                                </div>
-                            </td>
-                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Vintage Graphic Crop</td>
-                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Patchwork</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <span class="bg-leafGreen text-white text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Available</span>
-                            </td>
-                            <td class="p-4 flex justify-center gap-2 items-center h-full">
-                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
-                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
-                            </td>
-                        </tr>
-
-                        <!-- Row 4 -->
-                        <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors cursor-pointer group">
-                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">004</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
-                                    <img src="assets/1000020773.jpg" alt="Denim Top" class="w-full h-full object-cover">
-                                </div>
-                            </td>
-                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Distressed Denim Halter</td>
-                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Appliqué</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <span class="bg-leafGreen text-white text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Available</span>
-                            </td>
-                            <td class="p-4 flex justify-center gap-2 items-center h-full">
-                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
-                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
-                            </td>
-                        </tr>
-
-                        <!-- Row 5 -->
-                        <tr class="hover:bg-brandYellow transition-colors cursor-pointer group">
-                            <td class="p-4 border-r-4 border-brandBlack text-center font-normal text-gray-700">005</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <div class="w-12 h-12 rounded-lg border-2 border-brandBlack overflow-hidden bg-bubblegumPink group-hover:scale-105 transition-transform">
-                                    <img src="assets/1000020753.jpg" alt="Floral Sweater" class="w-full h-full object-cover">
-                                </div>
-                            </td>
-                            <td class="p-4 border-r-4 border-brandBlack font-semibold uppercase text-brandBlack">Textured Floral Knit</td>
-                            <td class="p-4 border-r-4 border-brandBlack font-normal text-gray-800">Patchwork</td>
-                            <td class="p-4 border-r-4 border-brandBlack">
-                                <span class="bg-cardWhite text-brandBlack text-xs font-semibold uppercase py-1 px-3 rounded-full border-2 border-brandBlack shadow-[2px_2px_0_0_#1A1A1A]">Archived</span>
-                            </td>
-                            <td class="p-4 flex justify-center gap-2 items-center h-full">
-                                <button class="bg-papayaOrange text-brandBlack border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Edit</button>
-                                <button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="flex justify-between items-center mt-6">
-                <span class="font-normal text-sm bg-cardWhite border-2 border-brandBlack px-3 py-1 rounded shadow-chunky-sm">Showing 1-5 of 25 pieces</span>
-                <div class="flex gap-2">
-                    <button class="px-4 py-2 border-4 border-brandBlack rounded-lg bg-cardWhite font-semibold uppercase hover:bg-papayaOrange hover:-translate-y-1 shadow-chunky hover:shadow-chunky-hover transition-all">&larr; Prev</button>
-                    <button class="px-4 py-2 border-4 border-brandBlack rounded-lg bg-cardWhite font-semibold uppercase hover:bg-papayaOrange hover:-translate-y-1 shadow-chunky hover:shadow-chunky-hover transition-all">Next &rarr;</button>
+                <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-bubblegumPink border-b-4 border-brandBlack uppercase text-sm font-semibold">
+                                <th class="p-4 border-r-4 border-brandBlack w-16 text-center">ID</th>
+                                <th class="p-4 border-r-4 border-brandBlack w-24">Image</th>
+                                <th class="p-4 border-r-4 border-brandBlack">Piece Name</th>
+                                <th class="p-4 border-r-4 border-brandBlack">Category</th>
+                                <th class="p-4 border-r-4 border-brandBlack">Placement</th>
+                                <th class="p-4 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-catalog-body">
+                            </tbody>
+                    </table>
+                </div>
+                <div class="flex justify-between items-center mt-6">
+                    <span id="admin-item-count" class="font-normal text-sm bg-cardWhite border-2 border-brandBlack px-3 py-1 rounded shadow-chunky-sm">Showing 0 pieces</span>
                 </div>
             </div>
+        </section>
 
-        </div>
+        <section id="section-categories" class="hidden flex-col h-full">
+            <header class="bg-cardWhite border-b-4 border-brandBlack px-8 py-6 sticky top-0 z-10">
+                <h2 class="text-3xl font-bold uppercase tracking-wide drop-shadow-[2px_2px_0_var(--tw-shadow-color)] shadow-leafGreen">Manage Categories</h2>
+            </header>
+            <div class="p-8 flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-1/3">
+                    <div class="bg-brandYellow border-4 border-brandBlack rounded-2xl p-6 shadow-chunky">
+                        <h3 class="text-xl font-bold uppercase mb-4 border-b-4 border-brandBlack pb-2">New Category</h3>
+                        <form id="add-category-form" class="flex flex-col gap-4">
+                            <div>
+                                <label class="block text-sm font-bold uppercase mb-1">Category Name</label>
+                                <input type="text" placeholder="e.g. Patchwork Basics" class="w-full p-3 border-4 border-brandBlack rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-leafGreen bg-cardWhite">
+                            </div>
+                            <button type="button" class="mt-2 bg-leafGreen text-cardWhite border-4 border-brandBlack rounded-xl py-3 font-bold uppercase shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky transition-all">
+                                Add Category
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-2/3">
+                    <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-leafGreen text-white border-b-4 border-brandBlack uppercase text-sm font-semibold">
+                                    <th class="p-4 border-r-4 border-brandBlack">Category Name</th>
+                                    <th class="p-4 border-r-4 border-brandBlack text-center">Status</th>
+                                    <th class="p-4 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors">
+                                    <td class="p-4 border-r-4 border-brandBlack font-bold uppercase">Different Artist</td>
+                                    <td class="p-4 border-r-4 border-brandBlack text-center"><span class="bg-leafGreen text-white text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack">Active</span></td>
+                                    <td class="p-4 text-center"><button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Remove</button></td>
+                                </tr>
+                                <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors">
+                                    <td class="p-4 border-r-4 border-brandBlack font-bold uppercase">Reverie Collection</td>
+                                    <td class="p-4 border-r-4 border-brandBlack text-center"><span class="bg-leafGreen text-white text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack">Active</span></td>
+                                    <td class="p-4 text-center"><button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Remove</button></td>
+                                </tr>
+                                <tr class="border-b-4 border-brandBlack hover:bg-brandYellow transition-colors">
+                                    <td class="p-4 border-r-4 border-brandBlack font-bold uppercase">Appliqué</td>
+                                    <td class="p-4 border-r-4 border-brandBlack text-center"><span class="bg-leafGreen text-white text-xs font-bold uppercase py-1 px-3 rounded-full border-2 border-brandBlack">Active</span></td>
+                                    <td class="p-4 text-center"><button class="bg-strawberryRed text-white border-2 border-brandBlack rounded uppercase font-bold text-xs py-1 px-3 shadow-chunky-sm hover:-translate-y-0.5 hover:shadow-chunky transition-all">Remove</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-settings" class="hidden flex-col h-full">
+            <header class="bg-cardWhite border-b-4 border-brandBlack px-8 py-6 sticky top-0 z-10">
+                <h2 class="text-3xl font-bold uppercase tracking-wide drop-shadow-[2px_2px_0_var(--tw-shadow-color)] shadow-brandBlack">Storefront Settings</h2>
+            </header>
+            <div class="p-8 max-w-3xl flex flex-col gap-8">
+                <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky p-6">
+                    <h3 class="text-xl font-bold uppercase tracking-wide text-brandBlack mb-2 border-b-4 border-brandBlack pb-2">Hero Banner Configuration</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-4">Update the main headline displayed on the lookbook landing page.</p>
+                    <div class="flex gap-4">
+                        <input type="text" id="hero-title-input" value="The Papaya Collection" class="flex-1 p-3 border-4 border-brandBlack rounded-xl font-bold text-sm focus:outline-none focus:ring-4 focus:ring-brandBlack bg-gridGray">
+                        <button class="bg-brandBlack text-cardWhite border-2 border-brandBlack rounded-xl uppercase font-bold text-sm py-3 px-6 shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-strawberryRed transition-all">
+                            Save Text
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-cardWhite border-4 border-brandBlack rounded-2xl shadow-chunky p-6">
+                    <h3 class="text-xl font-bold uppercase tracking-wide text-brandBlack mb-2 border-b-4 border-brandBlack pb-2">Store Operations</h3>
+                    <div class="flex flex-col gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-bold uppercase mb-1">Order Email Address</label>
+                            <input type="email" value="papayareworks@gmail.com" class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-brandBlack bg-gridGray">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase mb-1">Instagram Handle</label>
+                            <input type="text" value="@papayareworks" class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-brandBlack bg-gridGray">
+                        </div>
+                        <button class="bg-papayaOrange text-brandBlack border-4 border-brandBlack rounded-xl uppercase font-bold text-sm py-3 px-6 shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky w-1/3 mt-2 transition-all">
+                            Update Links
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
+    <div id="add-modal" class="fixed inset-0 bg-brandBlack/80 z-50 hidden flex-col items-center justify-center p-4">
+        <div class="bg-brandYellow border-4 border-brandBlack rounded-3xl p-8 max-w-lg w-full shadow-[8px_8px_0_0_#4CAF50] relative">
+            <h3 class="text-2xl font-bold uppercase tracking-wide mb-6 text-brandBlack border-b-4 border-brandBlack pb-4">Add New Piece</h3>
+            <form id="add-piece-form" class="flex flex-col gap-4">
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-1">Piece Name</label>
+                    <input type="text" id="new-name" placeholder="e.g. Classic Patchwork Fleur" required class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-1">Category</label>
+                    <select id="new-category" class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm bg-cardWhite">
+                        <option value="Different Artist">Different Artist</option>
+                        <option value="Reverie Collection">Reverie Collection</option>
+                        <option value="Appliqué">Appliqué</option>
+                    </select>
+                </div>
+                <div class="bg-bubblegumPink p-4 rounded-xl border-4 border-brandBlack">
+                    <label class="block text-sm font-bold uppercase mb-1 text-brandBlack">Storefront Placement</label>
+                    <select id="new-placement" class="w-full p-3 border-4 border-brandBlack rounded-xl font-bold text-sm focus:outline-none focus:ring-4 focus:ring-cardWhite shadow-chunky-sm bg-cardWhite">
+                        <option value="latest">Latest Drops (Default)</option>
+                        <option value="featured">Featured Pieces Carousel 🔥</option>
+                        <option value="archive">Archive</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-1">Add Image</label>
+                    <input type="file" id="new-image" accept="image/*" required class="w-full border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-bubblegumPink shadow-chunky-sm bg-cardWhite file:mr-4 file:py-3 file:px-4 file:border-0 file:border-r-4 file:border-brandBlack file:text-sm file:font-bold file:bg-bubblegumPink file:text-brandBlack hover:file:bg-papayaOrange file:cursor-pointer cursor-pointer transition-all">
+                    
+                    <div id="new-image-preview-container" class="mt-4 hidden text-center">
+                        <span class="block text-xs font-bold uppercase text-gray-500 mb-1">Preview</span>
+                        <img id="new-image-preview" src="" alt="Preview" class="h-32 w-auto mx-auto object-cover border-4 border-brandBlack rounded-xl shadow-chunky-sm bg-gridGray">
+                    </div>
+                </div>
+                <div class="flex gap-4 mt-4">
+                    <button type="submit" class="flex-1 bg-leafGreen text-cardWhite border-4 border-brandBlack rounded-xl py-3 font-bold uppercase shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky transition-all">Save Piece</button>
+                    <button type="button" id="close-modal-btn" class="flex-1 bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-xl py-3 font-bold uppercase shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-strawberryRed hover:text-white transition-all">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="fixed inset-0 bg-brandBlack/80 z-50 hidden flex-col items-center justify-center p-4">
+        <div class="bg-cardWhite border-4 border-brandBlack rounded-3xl p-8 max-w-lg w-full shadow-[8px_8px_0_0_#FF9800] relative">
+            <h3 class="text-2xl font-bold uppercase tracking-wide mb-6 text-brandBlack border-b-4 border-brandBlack pb-4">Edit Piece</h3>
+            <form id="edit-piece-form" class="flex flex-col gap-4">
+                <input type="hidden" id="edit-id">
+                
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-1">Piece Name</label>
+                    <input type="text" id="edit-name" required class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-1">Category</label>
+                    <select id="edit-category" class="w-full p-3 border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm bg-gridGray">
+                        <option value="Different Artist">Different Artist</option>
+                        <option value="Reverie Collection">Reverie Collection</option>
+                        <option value="Appliqué">Appliqué</option>
+                    </select>
+                </div>
+                <div class="bg-papayaOrange p-4 rounded-xl border-4 border-brandBlack">
+                    <label class="block text-sm font-bold uppercase mb-1 text-brandBlack">Storefront Placement</label>
+                    <select id="edit-placement" class="w-full p-3 border-4 border-brandBlack rounded-xl font-bold text-sm focus:outline-none focus:ring-4 focus:ring-cardWhite shadow-chunky-sm bg-cardWhite">
+                        <option value="latest">Latest Drops</option>
+                        <option value="featured">Featured Pieces Carousel 🔥</option>
+                        <option value="archive">Archive</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold uppercase mb-1">Update Image (Optional)</label>
+                    <input type="file" id="edit-image" accept="image/*" class="w-full border-4 border-brandBlack rounded-xl font-normal text-sm focus:outline-none focus:ring-4 focus:ring-papayaOrange shadow-chunky-sm bg-cardWhite file:mr-4 file:py-3 file:px-4 file:border-0 file:border-r-4 file:border-brandBlack file:text-sm file:font-bold file:bg-papayaOrange file:text-brandBlack hover:file:bg-bubblegumPink file:cursor-pointer cursor-pointer transition-all">
+                    
+                    <div id="edit-image-preview-container" class="mt-4 hidden text-center">
+                        <span class="block text-xs font-bold uppercase text-gray-500 mb-1">Current/New Image</span>
+                        <img id="edit-image-preview" src="" alt="Preview" class="h-32 w-auto mx-auto object-cover border-4 border-brandBlack rounded-xl shadow-chunky-sm bg-gridGray">
+                    </div>
+                </div>
+                <div class="flex gap-4 mt-4">
+                    <button type="submit" class="flex-1 bg-brandBlack text-cardWhite border-4 border-brandBlack rounded-xl py-3 font-bold uppercase shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky hover:bg-strawberryRed transition-all">Save Changes</button>
+                    <button type="button" id="close-edit-modal-btn" class="flex-1 bg-cardWhite text-brandBlack border-4 border-brandBlack rounded-xl py-3 font-bold uppercase shadow-chunky-sm hover:-translate-y-1 hover:shadow-chunky transition-all">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="public/admin.js"></script>
 </body>
 </html>
