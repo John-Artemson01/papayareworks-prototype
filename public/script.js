@@ -166,21 +166,20 @@ Shipping
     // --- CATALOG & UI LOGIC ---
 
     const catalogData = [
-        { id: 1, name: "Checkered Rework Top", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
-        { id: 2, name: "Starry Appliqué Vest", category: "Appliqué", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
-        { id: 3, name: "Vintage Graphic Crop", category: "Different Artist", image: "assets/1000020776.jpg", status: "Available", isFeatured: true, isNew: true },
-        { id: 4, name: "Distressed Denim Halter", category: "Reverie Collection", image: "assets/1000020773.jpg", status: "Available", isFeatured: true, isNew: false },
-        { id: 5, name: "Upcycled Denim Jacket", category: "Different Artist", image: "assets/1000020760.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 6, name: "Floral Tie-Up Shirt", category: "Reverie Collection", image: "assets/1000020764.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 8, name: "Strawberry Motif Tee", category: "Appliqué", image: "assets/1000020774.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 9, name: "Colorblock Button-Up", category: "Different Artist", image: "assets/1000020755.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 10, name: "Cropped Utility Jacket", category: "Appliqué", image: "assets/1000020758.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 11, name: "Fleece Contrast Zip", category: "Different Artist", image: "assets/1000020761.jpg", status: "Available", isFeatured: false, isNew: true },
-        { id: 12, name: "Oversized Stitch Sweater", category: "Appliqué", image: "assets/1000020765.jpg", status: "Archived", isFeatured: false, isNew: false },
-        { id: 13, name: "Spliced Band Tee", category: "Different Artist", image: "assets/1000020775.jpg", status: "Available", isFeatured: true, isNew: true },
-        { id: 14, name: "Teddy Bear Zip-Up", category: "Appliqué", image: "assets/1000020777.jpg", status: "Archived", isFeatured: true, isNew: false },
-        { id: 15, name: "Corset String Halter", category: "Reverie Collection", image: "assets/1000020771.jpg", status: "Available", isFeatured: true, isNew: true },
-        { id: 16, name: "Puffer Vest Rebuild", category: "Appliqué", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
+        { id: 1, name: "Classic Patchwork Button Down", category: "Different Artist", image: "assets/1000020772.jpg", status: "Available", isFeatured: true, isNew: false },
+        { id: 2, name: "Nature-Inspired Skirt ", category: "Appliqué", image: "assets/1000020768.jpg", status: "Archived", isFeatured: true, isNew: false },
+        { id: 3, name: "Yellow Barong Laced Fleur", category: "Different Artist", image: "assets/1000020776.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 5, name: "Orange Hirono Button Down", category: "Different Artist", image: "assets/1000020760.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 6, name: "Denim Jacket Classic Floral", category: "Reverie Collection", image: "assets/1000020764.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 8, name: "Classic Patchwork Fleur", category: "Appliqué", image: "assets/1000020774.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 9, name: "Orange Collar Paint Splash", category: "Different Artist", image: "assets/1000020755.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 10, name: "Grey Breakfast Collection", category: "Appliqué", image: "assets/1000020758.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 11, name: "Grey Space Collection", category: "Different Artist", image: "assets/1000020761.jpg", status: "Available", isFeatured: false, isNew: true },
+        { id: 12, name: "Reversible Vest", category: "Appliqué", image: "assets/1000020765.jpg", status: "Archived", isFeatured: false, isNew: false },
+        { id: 13, name: "Classic Patchwork Collection 2 Button Down", category: "Different Artist", image: "assets/1000020775.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 14, name: "Denim Crop Top", category: "Appliqué", image: "assets/1000020777.jpg", status: "Archived", isFeatured: true, isNew: false },
+        { id: 15, name: "Tulips Dress", category: "Reverie Collection", image: "assets/1000020771.jpg", status: "Available", isFeatured: true, isNew: true },
+        { id: 16, name: "Maroon Barong Laced Fleur", category: "Appliqué", image: "assets/1000020778.jpg", status: "Available", isFeatured: true, isNew: false },
     ];
 
     const featuredContainer = document.getElementById('featured-container');
